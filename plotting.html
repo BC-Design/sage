@@ -103,7 +103,7 @@ show(a)
 var('y x'); y = x^3; g = -x
 a = plot([],figsize=(4,4),title='Here is a Graph',frame=True)
 a += plot(y,x,(-1,1),color='red',legend_label='f(x)')
-a += plot(g,x,(-1,1),color='green',linestyle='--',thickness=5,legend_label='g(x)')
+a += plot(g,x,(-1,1),color='green',linestyle=':',thickness=5,legend_label='g(x)')
 a += circle((0.0,-0.5),0.5,color='blue')
 a += polygon([(0.1,0.3),(0.5,0.3),(0.1,0.7)],color='orange',fill=False)
 a.axes_labels(['$x$-axis, units','$y$-axis, units'])
