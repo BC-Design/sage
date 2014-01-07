@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+<!-- Local files containing the website icon and stylesheet. -->
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" type="text/css" href="theme.css">
+
+<!-- Imports needed to use the Sage cell server. -->
+<script type="text/javascript" src="http://aleph2.sagemath.org/static/jquery.min.js"></script>
+<script type="text/javascript" src="http://aleph2.sagemath.org/embedded_sagecell.js"></script>
+<script type="text/javascript" src="sagecell.js"></script>
+<script type="text/javascript" src="sage-text.js"></script>
+<script type="text/javascript" src="ganalytics.js"></script>
+
+<!-- Additional CSS customizations --> 
+<style type="text/css"></style>
+
+<!-- Page title --> 
+<title>Sage Math - Nonlinear Systems</title>
+</head>
+
+
+<body>
+<h1>Sage Math Tutorial - Nonlinear Systems</h1>
+<script type="text/javascript">sageHome()</script>
+
+<p>This page contains interactive Sage widgets - edit and re-evaluate them!</p>
+<p>"The Lotka-Volterra equations, also known as the predator-prey equations, are a pair of first-order, non-linear, differential equations frequently used to describe the dynamics of biological systems in which two species interact, one a predator and one its prey." via <a href="http://en.wikipedia.org/wiki/Lotka%E2%80%93Volterra_equation">Wikipedia</a></p>
+
+<!-- Create the Sage cell.  
+     You can put this anywhere, e.g., inside tables, etc. -->
+<h2>Simulating Lotka-Volterra Population Dynamics</h2>
+<div class="sagecell-plot" id="sagecell1"><script type="application/sage">
+### Simulates Lotka-Volterra population dynamics, producing a vector field
+### Arrows indicate the direction of population evolution
+### The blue contour is one potential stable loop
+var('t R F R0 F0 a b c d')
+## CONSTANTS
+a = 0.04         # rabbit birthrate
+b = 0.0005       # probability of predation per encounter
+c = 0.1*0.0005   # probability of predation per encounter, rabbit -> fox conversion efficiency
+d = 0.2          # death rate of foxes
+## INITIAL CONDITIONS
+R0 = 5000     #initial number of rabbits
+F0 = 200      #initial number of foxes
+
+## DIFFERENTIAL EQUATIONS
+de_R = (diff(R,t) == a*R - b*R*F)
+de_F = (diff(F,t) == c*R*F - d*F)
+
+## CALCULATION PARAMETERS
+end_points = 500
+stepsize = 1.0
+steps = end_points/stepsize
+ics = [0,R0,F0]
+des = [de_R.rhs(), de_F.rhs()]
+
+## NUMERICAL SOLUTION OF DIFFERENTIAL EQUATIONS
+sol = desolve_system_rk4(des,[R,F],ics,ivar=t,end_points=end_points,step=stepsize)
+
+## Clean up to graph
+sol_t=[]; sol_R=[]; sol_F=[]
+for i in range(steps):
+    sol_t.append(sol[i][0])
+    sol_R.append(sol[i][1])
+    sol_F.append(sol[i][2])
+    
+a = plot([],figsize=[6,4])
+a += line(zip(sol_R,sol_F))
+a += plot_vector_field((des[0], des[1]), (R,0,7000), (F,0,225),xmin=1500,color='orange')
+a.axes_labels(['Rabbits','Foxes']); show(a)
+</script></div>
+
+<script type="text/javascript">sageFooter()</script>
+</body>
+</html>
+
+

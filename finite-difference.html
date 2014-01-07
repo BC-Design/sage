@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+<!-- Local files containing the website icon and stylesheet. -->
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" type="text/css" href="theme.css">
+
+<!-- Imports needed to use the Sage cell server. -->
+<script type="text/javascript" src="http://aleph2.sagemath.org/static/jquery.min.js"></script>
+<script type="text/javascript" src="http://aleph2.sagemath.org/embedded_sagecell.js"></script>
+<script type="text/javascript" src="sagecell.js"></script>
+<script type="text/javascript" src="sage-text.js"></script>
+<script type="text/javascript" src="ganalytics.js"></script>
+
+<!-- Additional CSS customizations --> 
+<style type="text/css"></style>
+
+<!-- Page title --> 
+<title>Sage Math - Finite Difference Method</title>
+</head>
+
+
+<body>
+<h1>Sage Math Tutorial - Finite Differences</h1>
+<script type="text/javascript">sageHome()</script>
+
+<p>This page contains interactive Sage widgets - edit and re-evaluate them!</p>
+<p>Finite Difference Methods can be used to approximate the solutions of systems of differential equations: <a href="http://en.wikipedia.org/wiki/Finite_difference_method">Wikipedia - Finite Difference Methods</a>.  The Sage Cells in this page are linked, so variables and calculations carry over from one Cell to the next.</p>
+
+<div class="linkedcells">
+	<p>First, we define a simple finite difference method.  In this example, all sides are perfectly insulated and one of them contains a heating wire: 
+	</p>
+	<div class="sagecell-linked" id="sagecell1"><script type="application/sage">
+import numpy
+k = 0.1; step = 0; maxstep = 300; stepinterval = 5; t = 0; steps=[0,25,50,100,200,300]
+sol = []; colors=['red','orange','yellow','green','blue','violet', 'purple']
+T = numpy.array([10*floor(i/10).n() for i in range(0,100)]); T.shape=(10,10)
+a = list_plot3d([], frame_aspect_ratio=[1,1,1])
+
+def calcT(T,k):
+    Tn = T.copy()
+    for i in range(len(T)):
+        for j in range(len(T[0])):
+            if (i > 0): Tn[i][j] += k*(T[i-1][j]-T[i][j])
+            else: pass             # insulated edge
+
+            if (j > 0): Tn[i][j] += k*(T[i][j-1]-T[i][j])
+            else: Tn[i][j] += 1    # heated edge
+
+            if (i < len(T)-1): Tn[i][j] += k*(T[i+1][j]-T[i][j])
+            else: pass             # insulated edge
+
+            if (j < len(T[0])-1): Tn[i][j] += k*(T[i][j+1]-T[i][j])
+            else: pass             # insulated edge
+    T = Tn.copy()
+    return T
+	</script></div>
+
+	<p>Then, we execute the difference method in a 'while' loop for the desired number of steps:
+	</p>
+	<div class="sagecell-linked" id="sagecell1"><script type="application/sage">
+while step <= maxstep:
+    T = calcT(T=T,k=k)
+    if (step%stepinterval ==0):
+        sol.append(T)
+    step += 1
+	</script></div>
+
+	<p>Then, we create an @Interact plot to visualize the results.  If you have Java/Jmol installed, try checking the box to generate a zoomable, rotatable plot:
+	</p>
+	<div class="sagecell-linked" id="sagecell1"><script type="application/sage">
+for i in range(0,len(steps)):
+    a += list_plot3d(sol[steps[i]/stepinterval], texture=colors[i], interpolation_type='spline')
+    
+@interact
+def example(jmol=('Rotatable Plot', False), theta=(1.5*pi,(0,2*pi))):
+    b = a.rotate((0,0,1), theta)
+    show(a.rotate((0,0,1), 1.5*pi) if jmol else b, viewer='jmol' if jmol else 'tachyon')
+	</script></div>
+</div>
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+<script type="text/javascript">sageFooter()</script>
+
+</body>
+</html>
+
+

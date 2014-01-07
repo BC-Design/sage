@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+<!-- Local files containing the website icon and stylesheet. -->
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" type="text/css" href="theme.css">
+
+<!-- Imports needed to use the Sage cell server. -->
+<script type="text/javascript" src="http://aleph2.sagemath.org/static/jquery.min.js"></script>
+<script type="text/javascript" src="http://aleph2.sagemath.org/embedded_sagecell.js"></script>
+<script type="text/javascript" src="sagecell.js"></script>
+<script type="text/javascript" src="sage-text.js"></script>
+<script type="text/javascript" src="ganalytics.js"></script>
+
+<!-- Additional CSS customizations --> 
+<style type="text/css"></style>
+
+<!-- Page title --> 
+<title>Sage Math - Cython</title>
+</head>
+
+
+<body>
+<h1>Sage Math Tutorial - Compiled Python (Cython)</h1>
+<script type="text/javascript">sageHome()</script>
+
+<p>This page contains interactive Sage widgets - edit and re-evaluate them!</p>
+<p>Cython details: <a href="http://www.sagemath.org/doc/developer/coding_in_cython.html">Sage Documentation</a>. This demo shows the performance advantage that can be gleaned by using pre-compiled functions in place of Python functions.</p>
+
+<p>First, we numerically solve the Van Der Pol Oscillator using regular Python functions (slow!):</p>
+<!-- Create the Sage cell.  
+     You can put this anywhere, e.g., inside tables, etc. -->
+<div class="sagecell-plot" id="sagecell1"><script type="application/sage">
+def f_1(t,y,params):
+    return[y[1],-y[0]-params[0]*y[1]*(y[0]**2-1.0)]
+
+def j_1(t,y,params):
+    return [ [0.0, 1.0],[-2.0*params[0]*y[0]*y[1]-1.0,-params[0]*(y[0]*y[0]-1.0)] ]
+
+T=ode_solver()
+T.algorithm="rk8pd"
+T.function=f_1
+T.jacobian=j_1
+timeit('T.ode_solve(y_0=[1,0],t_span=[0,2000],params=[100],num_points=1000)')
+a = list_plot(T.interpolate_solution(),figsize=[5,4])
+show(a)
+</script></div>
+
+<p>Here is the exact same system, using precompiled Cython functions:</p>
+
+<div class="sagecell-plot" id="sagecell2"><script type="application/sage">
+%cython
+cimport sage.gsl.ode
+import sage.gsl.ode
+include 'gsl.pxi'
+
+cdef class van_der_pol(sage.gsl.ode.ode_system):
+    cdef int c_f(self,double t, double *y,double *dydt):
+        dydt[0]=y[1]
+        dydt[1]=-y[0]-100*y[1]*(y[0]*y[0]-1)
+        return GSL_SUCCESS
+    cdef int c_j(self, double t,double *y,double *dfdy,double *dfdt):
+        dfdy[0]=0
+        dfdy[1]=1.0
+        dfdy[2]=-2.0*100*y[0]*y[1]-1.0
+        dfdy[3]=-100*(y[0]*y[0]-1.0)
+        dfdt[0]=0
+        dfdt[1]=0
+        return GSL_SUCCESS
+
+%sage
+T = ode_solver()
+T.algorithm = "rk8pd"
+vander = van_der_pol()
+T.function=vander
+timeit('T.ode_solve(y_0 = [1,0], t_span=[0,2000], num_points=1000)')
+a = list_plot(T.interpolate_solution(),figsize=[5,4])
+show(a)
+</script></div>
+
+<script type="text/javascript">sageFooter()</script>
+
+</body>
+</html>
+
+

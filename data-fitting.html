@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+<!-- Local files containing the website icon and stylesheet. -->
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" type="text/css" href="theme.css">
+
+<!-- Imports needed to use the Sage cell server. -->
+<script type="text/javascript" src="http://aleph2.sagemath.org/static/jquery.min.js"></script>
+<script type="text/javascript" src="http://aleph2.sagemath.org/embedded_sagecell.js"></script>
+<script type="text/javascript" src="sagecell.js"></script>
+<script type="text/javascript" src="sage-text.js"></script>
+<script type="text/javascript" src="ganalytics.js"></script>
+
+<!-- Additional CSS customizations --> 
+<style type="text/css"></style>
+
+<!-- Page title --> 
+<title>Sage Math - Data Fitting</title>
+</head>
+
+
+<body>
+<h1>Sage Math Tutorial - Data Fitting</h1>
+<script type="text/javascript">sageHome()</script>
+
+<p>This page contains interactive Sage widgets - edit and re-evaluate them!</p>
+<p>A common situation in science and engineering: you've collected a bunch of data and you'd like to fit a function to it.  Sage trivializes this procedure.</p>
+
+<p>First, we'll generate some data that has some built-in variance using list comprehension and the 'normalvariate()' function and store it in the array 'data'; then we'll propose a model with some adjustable parameters, and find the value of those parameters that gives the best fit.  Finally, we'll plug those parameter values back into the model and graph it alongside the data.</p>
+
+<!-- Create the Sage cell.  
+     You can put this anywhere, e.g., inside tables, etc. -->
+<div class="sagecell-plot" id="sagecell2"><script type="application/sage">
+# for this example, we first generate some data with built-in variance:
+data = [(i, 1.2 * sin(0.5*i-0.2) + 0.1 * normalvariate(0, 1)) for i in xsrange(0, 4*pi, 0.2)]
+
+# design a model with adjustable parameters a,b,c that describes the data
+var('a, b, c, x')
+model(x) = a * sin(b * x - c)
+
+# calculate the values of the parameters that best fit the model to the data
+sol = find_fit(data,model)
+show(sol)
+
+# define f(x), the model with the parameters set to the fitted values
+f(x) = model(a=sol[0].rhs(),b=sol[1].rhs(),c=sol[2].rhs())
+
+# create an empty plot object
+a = plot([])
+# add a plot of the model, with respect to x from -0.5 to 12.5
+a += plot(f(x),x,[-0.5,12.5])
+
+# add a plot of the data, in red
+a += list_plot(data,color='red')
+show(a)
+</script></div>
+
+<script type="text/javascript">sageFooter()</script>
+
+</body>
+</html>
+
+

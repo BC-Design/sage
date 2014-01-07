@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+<!-- Local files containing the website icon and stylesheet. -->
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" type="text/css" href="theme.css">
+
+<!-- Imports needed to use the Sage cell server. -->
+<script type="text/javascript" src="http://aleph2.sagemath.org/static/jquery.min.js"></script>
+<script type="text/javascript" src="http://aleph2.sagemath.org/embedded_sagecell.js"></script>
+<script type="text/javascript" src="sagecell.js"></script>
+<script type="text/javascript" src="sage-text.js"></script>
+<script type="text/javascript" src="ganalytics.js"></script>
+
+<!-- Additional CSS customizations --> 
+<style type="text/css"></style>
+
+<!-- Page title --> 
+<title>Sage Math - Calculus</title>
+</head>
+
+
+<body>
+<h1>Sage Math Tutorial - Calculus</h1>
+<script type="text/javascript">sageHome()</script>
+
+<p>This page contains interactive Sage widgets - edit and re-evaluate them!</p>
+<p>Let's say you have an equation you'd like to work with.  
+With Sage, it's incredibly simple to evaluate, graph, and perform calculus:</p>
+
+<!-- Create the Sage cell.  
+     You can put this anywhere, e.g., inside tables, etc. -->
+<div class="sagecell-plot" id="sagecell1"><script type="application/sage">
+f(x) = x^2 * sin(x) + cos(x)
+show(f(x))
+show(f(x=2))
+show(f(x=2).n())
+</script></div>
+
+<p>How about some calculus?  Let's take the integral and derivative, then display them:</p>
+
+<div class="sagecell-plot" id="sagecell2"><script type="application/sage">
+f(x) = x^2 * sin(x) + cos(x)
+d = diff(f(x),x)
+i = integrate(f(x),x)
+show("the derivative is: " + str(d))
+show("the integral is: " + str(i))
+</script></div>
+
+<p>Numerical integration couldn't be easier:</p>
+
+<div class="sagecell-plot" id="sagecell3"><script type="application/sage">
+f(x) = x^2 * sin(x) + cos(x)
+numerical_integral(f,2,3)
+</script></div>
+
+<p>As we'll show later, a plot can be customized in every way you can think of.</p>
+
+<div class="sagecell-plot" id="sagecell4"><script type="application/sage">
+f(x) = x^2 * sin(x) + cos(x)
+plot(f,x,(0,6))
+</script></div>
+
+<script type="text/javascript">sageFooter()</script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+<!-- Local files containing the website icon and stylesheet. -->
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" type="text/css" href="theme.css">
+
+<!-- Imports needed to use the Sage cell server. -->
+<script type="text/javascript" src="http://aleph2.sagemath.org/static/jquery.min.js"></script>
+<script type="text/javascript" src="http://aleph2.sagemath.org/embedded_sagecell.js"></script>
+<script type="text/javascript" src="sagecell.js"></script>
+<script type="text/javascript" src="sage-text.js"></script>
+<script type="text/javascript" src="ganalytics.js"></script>
+
+<!-- Additional CSS customizations --> 
+<style type="text/css"></style>
+
+<!-- Page title --> 
+<title>Sage Math - Graphs</title>
+</head>
+
+
+<body>
+<h1>Sage Math Tutorial - Graphs</h1>
+<script type="text/javascript">sageHome()</script>
+
+<p>This page contains interactive Sage widgets - edit and re-evaluate them!</p>
+<p>Graphs! Not the kind with the two axes and the data points - I mean the kind with nodes joined together by vertices. You can do some really, really amusing stuff with these.</p>
+
+
+<!-- Create the Sage cell.  
+     You can put this anywhere, e.g., inside tables, etc. -->
+<div class="sagecell-plot" id="sagecell2"><script type="application/sage">
+entry='this is total nonsense'
+phrase = list(entry)
+oc = phrase.pop(0)
+hash = {}
+for c in phrase:
+    if(hash.has_key(oc)): hash[oc].append(c)
+    else: hash[oc] = [c]
+    oc = c
+DiGraph(hash).show(figsize=(5,5))
+</script></div>
+
+<script type="text/javascript">sageFooter()</script>
+
+</body>
+</html>
+
+

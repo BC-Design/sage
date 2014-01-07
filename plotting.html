@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+<!-- Local files containing the website icon and stylesheet. -->
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" type="text/css" href="theme.css">
+
+<!-- Imports needed to use the Sage cell server. -->
+<script type="text/javascript" src="http://aleph2.sagemath.org/static/jquery.min.js"></script>
+<script type="text/javascript" src="http://aleph2.sagemath.org/embedded_sagecell.js"></script>
+<script type="text/javascript" src="sagecell.js"></script>
+<script type="text/javascript" src="sage-text.js"></script>
+<script type="text/javascript" src="ganalytics.js"></script>
+
+<!-- Additional CSS customizations --> 
+<style type="text/css"></style>
+
+<!-- Page title --> 
+<title>Sage Math - Plotting</title>
+</head>
+
+
+<body>
+<h1>Sage Math Tutorial - Plotting</h1>
+<script type="text/javascript">sageHome()</script>
+
+<p>This page contains interactive Sage widgets - edit and re-evaluate them!</p>
+<p>Information on the plotting commands is available in the <a href="http://www.sagemath.org/doc/reference/sage/plot/graphics.html">Sage Documentation</a></p>
+
+
+<!-- Create the Sage cell.  
+     You can put this anywhere, e.g., inside tables, etc. -->
+
+<p>Plotting functions couldn't be easier with the 'plot' command:</p>
+<div class="sagecell-plot" id="sagecell1"><script type="application/sage">
+var('y x'); y = x^3
+plot(y,x,(-1,1))
+</script></div>
+
+<p>Use the 'figsize=(x,y)' option to control the plot size:</p>
+<div class="sagecell-plot" id="sagecell2"><script type="application/sage">
+var('y x'); y = x^3
+plot(y,x,(-1,1),figsize=(4,4))
+</script></div>
+
+<p>Adding a title? Easily done!</p>
+<div class="sagecell-plot" id="sagecell3"><script type="application/sage">
+var('y x'); y = x^3
+plot(y,x,(-1,1),figsize=(4,4),title="Here is a Graph")
+</script></div>
+
+<p>You can create an empty plot object and add additional plots and graphics to it:</p>
+<div class="sagecell-plot" id="sagecell4"><script type="application/sage">
+var('y x'); y = x^3
+a = plot([],figsize=(4,4),title="Here is a Graph")
+a += plot(y,x,(-1,1))
+show(a)
+</script></div>
+
+<p>Use this to plot multiple functions on a single graphic:</p>
+<div class="sagecell-plot" id="sagecell5"><script type="application/sage">
+var('x'); y = x^3; g = -x
+a = plot([],figsize=(4,4),title="Here is a Graph")
+a += plot(y,x,(-1,1))
+a += plot(g,x,(-1,1))
+show(a)
+</script></div>
+
+<p>Different colors? Different line style? Legend labels? Sure!</p>
+<div class="sagecell-plot" id="sagecell6"><script type="application/sage">
+var('y x'); y = x^3; g = -x
+a = plot([],figsize=(4,4),title="Here is a Graph")
+a += plot(y,x,(-1,1),color='red',legend_label='f(x)')
+a += plot(g,x,(-1,1),color='green',linestyle='--',thickness=5,legend_label='g(x)')
+show(a)
+</script></div>
+
+<p>Adding graphical objects other than plots? Done!</p>
+<div class="sagecell-plot" id="sagecell7"><script type="application/sage">
+var('y x'); y = x^3; g = -x
+a = plot([],figsize=(4,4),title="Here is a Graph")
+a += plot(y,x,(-1,1),color='red',legend_label='f(x)')
+a += plot(g,x,(-1,1),color='green',linestyle='--',thickness=5,legend_label='g(x)')
+a += circle((0.0,-0.5),0.5,color='blue')
+a += polygon([(0.1,0.3),(0.5,0.3),(0.1,0.7)],color='orange',fill=False)
+show(a)
+</script></div>
+
+<p>The 'frame' option puts a box around the plot, and 'axes_labels' does what it sounds like:</p>
+<div class="sagecell-plot" id="sagecell8"><script type="application/sage">
+var('y x'); y = x^3; g = -x
+a = plot([],figsize=(4,4),title='Here is a Graph',frame=True,axes_labels=['$x$-axis, units','$y$-axis, units'])
+a += plot(y,x,(-1,1),color='red',legend_label='f(x)')
+a += plot(g,x,(-1,1),color='green',linestyle='--',thickness=5,legend_label='g(x)')
+a += circle((0.0,-0.5),0.5,color='blue')
+a += polygon([(0.1,0.3),(0.5,0.3),(0.1,0.7)],color='orange',fill=False)
+show(a)
+</script></div>
+
+<p>Some attributes can also be applied in the 'plot_object.attribute()' format. To see the built-in colors, evaluate 'list(colors)'. To see all plot attributes and options, see the <a href='http://www.sagemath.org/doc/reference/sage/plot/plot.html'>Sage Documentation</a> or evaluate 'plot?' in a Sage Notebook. This does not yet work in a Sage Cell, unfortunately! </p>
+<div class="sagecell-plot" id="sagecell9"><script type="application/sage">
+var('y x'); y = x^3; g = -x
+a = plot([],figsize=(4,4),title='Here is a Graph',frame=True)
+a += plot(y,x,(-1,1),color='red',legend_label='f(x)')
+a += plot(g,x,(-1,1),color='green',linestyle='--',thickness=5,legend_label='g(x)')
+a += circle((0.0,-0.5),0.5,color='blue')
+a += polygon([(0.1,0.3),(0.5,0.3),(0.1,0.7)],color='orange',fill=False)
+a.axes_labels(['$x$-axis, units','$y$-axis, units'])
+a.axes_label_color('darkgrey')
+a.set_legend_options(ncol=2,back_color='whitesmoke',fancybox=true,loc=9)
+a.set_axes_range(-1,1,-1,1)
+show(a)
+</script></div>
+
+<p>Some functions, including numerical differential equation solvers, return lists of points instead of mathematical functions. The 'plot()' function won't work! use list_plot()' instead. Options are the same:</p>
+<div class="sagecell-plot" id="sagecell10"><script type="application/sage">
+des = lambda t,y: [sin(t)]
+Q = ode_solver(function=des, y_0=[0])
+Q.ode_solve(t_span=[-2*pi(),2*pi()], num_points=100)
+a = plot([],figsize=(4,4),title='Here is Another Graph',frame=True)
+a += list_plot(Q.interpolate_solution())
+show(a)
+</script></div>
+
+<script type="text/javascript">sageFooter()</script>
+
+</body>
+</html>
