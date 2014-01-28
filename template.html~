@@ -7,12 +7,11 @@
 <link rel="stylesheet" type="text/css" href="theme.css">
 
 <!-- Imports needed to use the Sage cell server. -->
-<script type="text/javascript" src="https://sagecell.sagemath.org/static/jquery.min.js"></script>
-<script type="text/javascript" src="https://sagecell.sagemath.org/embedded_sagecell.js"></script>
+<script type="text/javascript" src="http://aleph2.sagemath.org/static/jquery.min.js"></script>
+<script type="text/javascript" src="http://aleph2.sagemath.org/embedded_sagecell.js"></script>
 <script type="text/javascript" src="sagecell.js"></script>
 <script type="text/javascript" src="sage-text.js"></script>
 <script type="text/javascript" src="ganalytics.js"></script>
-<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
 
 <!-- Additional CSS customizations. --> 
 <style type="text/css"></style>
