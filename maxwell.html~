@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+<!-- Local files containing the website icon and stylesheet. -->
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" type="text/css" href="theme.css">
+
+<!-- Imports needed to use the Sage cell server. -->
+<script type="text/javascript" src="https://sagecell.sagemath.org/static/jquery.min.js"></script>
+<script type="text/javascript" src="https://sagecell.sagemath.org/embedded_sagecell.js"></script>
+<script type="text/javascript" src="sagecell.js"></script>
+<script type="text/javascript" src="sage-text.js"></script>
+<script type="text/javascript" src="ganalytics.js"></script>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+
+<!-- Additional CSS customizations. --> 
+<style type="text/css"></style>
+
+<!-- Page title. --> 
+<title>Sage Math - Template</title>
+</head>
+
+
+<body>
+<h1>Sage Math Tutorial - Title</h1>
+<script type="text/javascript">sageHome()</script>
+
+<p>This page contains interactive Sage widgets - edit and re-evaluate them!</p>
+<p>Introductory Text</p>
+
+
+<!-- Create the Sage cell. -->
+<div class="sagecell-plot" id="sagecell1"><script type="application/sage">
+f(x,a) = sqrt(4/pi)*(x**2)*exp(-(x**2)/(2*a**2))/(a**3)
+
+def f_bar(a):
+    return numerical_integral(f(x,a)*x,0,+infinity)[0]
+
+g = plot(f(x,a=1),x,0,10,color='blue')
+g += plot(f(x,a=2),x,0,10,color='green')
+
+show(g)
+show(f_bar(a=1))
+show(f_bar(a=2))
+</script></div>
+
+<script type="text/javascript">sageFooter()</script>
+
+</body>
+</html>
+
+
