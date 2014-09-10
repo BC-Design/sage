@@ -18,31 +18,33 @@
 <style type="text/css"></style>
 
 <!-- Page title. --> 
-<title>Sage Math - Template</title>
+<title>Sage Math - Maxwell Distribution</title>
 </head>
 
 
 <body>
-<h1>Sage Math Tutorial - Title</h1>
+<h1>Sage Math Tutorial - Maxwell Distribution</h1>
 <script type="text/javascript">sageHome()</script>
 
 <p>This page contains interactive Sage widgets - edit and re-evaluate them!</p>
-<p>Introductory Text</p>
-
+<p>Maxwell-type probability distributions describe the distribution of features, 
+	such as velocity or kinetic energy, in a large collection of particles.
+	</p>
+<p>Notice how the prevalence of states in the right-hand 'tail' of the distribution
+	increases rapidly for smaller values of 'a', though the mean changes slowly.
+	</p>
 
 <!-- Create the Sage cell. -->
 <div class="sagecell-plot" id="sagecell1"><script type="application/sage">
 f(x,a) = sqrt(4/pi)*(x**2)*exp(-(x**2)/(2*a**2))/(a**3)
+def f_bar(a): return numerical_integral(f(x,a)*x,0,+infinity)[0]
+masses = [1.0,1.1,1.2,1.3,1.4,1.5]
+g = plot([]); c = rainbow(len(masses)+3)
 
-def f_bar(a):
-    return numerical_integral(f(x,a)*x,0,+infinity)[0]
-
-g = plot(f(x,a=1),x,0,10,color='blue')
-g += plot(f(x,a=2),x,0,10,color='green')
-
+for mass in masses:
+    legend = 'mass of '+str(mass)[0:4]+', f_bar='+str(f_bar(a=mass))[0:4]
+    g += plot(f(x,a=(1/mass**2)),x,0,5,color=c.pop(),legend_label=legend)
 show(g)
-show(f_bar(a=1))
-show(f_bar(a=2))
 </script></div>
 
 <script type="text/javascript">sageFooter()</script>
