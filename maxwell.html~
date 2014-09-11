@@ -32,19 +32,25 @@
 	</p>
 <p>Notice how the prevalence of states in the right-hand 'tail' of the distribution
 	increases rapidly for smaller values of the scaling factor 'a', though the mean changes slowly.
-	For the Maxwell-Boltzmann distribution of particles velocities in an ideal gas, a = sqrt(kT/m).
+	For the Maxwell-Boltzmann distribution of particle velocities in an ideal gas, a = sqrt(kT/m).
 	</p>
 
 <!-- Create the Sage cell. -->
-<div class="sagecell-plot" id="sagecell1"><script type="application/sage">
-f(x,a) = sqrt(4/pi)*(x**2)*exp(-(x**2)/(2*a**2))/(a**3)
-def f_bar(a): return numerical_integral(f(x,a)*x,0,+infinity)[0]
-masses = [1.0,1.1,1.2,1.3,1.4,1.5]
-g = plot([]); c = rainbow(len(masses)+3)
+T = 300 # absolute temperature; 300K
+masses = {'He':2,'Ne':10,'N2':14,'O2':16,'Ar':18} # name, mass (amu)
+k = 1.281*(10^-23) # Boltzmann constant
+a(m) = sqrt(k*T/m)
+f(x,m) = sqrt(4/pi)*(x**2)*exp(-(x**2)/(2*a**2))/(a**3)
+def f_bar(m): return numerical_integral(f(x,m)*x,0,+infinity)[0]
 
-for mass in masses:
-    legend = 'mass of '+str(mass)[0:4]+', f_bar='+str(f_bar(a=mass))[0:4]
-    g += plot(f(x,a=(1/mass**2)),x,0,5,color=c.pop(),legend_label=legend)
+g = plot([],title='Maxwell-Boltzmann Distribution',frame=True,axes_labels=['velocity, m/s','probability'])
+c = rainbow(len(masses)+3)
+
+for molecule in masses:
+    mass = masses[molecule]
+    mkg = mass*1.661*10^-27
+    legend = molecule+': '+str(mass)[0:4]+' amu, f_bar='+str(f_bar(m=mkg))[0:4]+' m/s'
+    g += plot(f(x,m=mkg),x,(0,2500),color=c.pop(),legend_label=legend)
 show(g)
 </script></div>
 
