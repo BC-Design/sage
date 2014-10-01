@@ -38,13 +38,14 @@
 <!-- Create the Sage cell. -->
 <div class="sagecell-plot" id="sagecell1"><script type="application/sage">
 T = 300 # absolute temperature; 300K
-masses = {'H2':2,'He':4,'Ne':10,'N2':14,'O2':16,'Ar':18} # name, mass (amu)
+masses = {'H2':2,'He':4,'Ne':10,'Ar':18,'N2':28,'O2':32} # name, mass (amu)
 k = 1.281*(10^-23) # Boltzmann constant
 a(m) = sqrt(k*T/m)
 f(x,m) = sqrt(4/pi)*(x**2)*exp(-(x**2)/(2*a**2))/(a**3)
 def f_bar(m): return numerical_integral(f(x,m)*x,0,+infinity)[0]
+plotTitle = 'Maxwell-Boltzmann Distribution, '+str(T)+'K'
 
-g = plot([],title='Maxwell-Boltzmann Distribution, '+str(T)+'K',frame=True,axes_labels=['velocity, m/s','probability'])
+g = plot([],title=plotTitle,frame=True,axes_labels=['velocity, m/s','probability'])
 c = rainbow(len(masses)+3)
 
 for molecule in masses:
@@ -55,7 +56,7 @@ for molecule in masses:
     legend = molecule+': '+str(mass)[0:4]+' amu, f_bar='+str(vavg)[0:4]+' m/s'
     g += plot(f(x,m=mkg),x,(0,2500),color=linec,legend_label=legend)
     g += line([(vavg,0), (vavg,1)],color=linec,linestyle='--')
-g += plot([],ymax=0.0025)
+g += plot([],ymax=0.0035)
 show(g)
 </script></div>
 
