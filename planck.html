@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+<!-- Local files containing the website icon and stylesheet. -->
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" type="text/css" href="theme.css">
+
+<!-- Imports needed to use the Sage cell server. -->
+<script type="text/javascript" src="https://sagecell.sagemath.org/static/jquery.min.js"></script>
+<script type="text/javascript" src="https://sagecell.sagemath.org/embedded_sagecell.js"></script>
+<script type="text/javascript" src="sagecell.js"></script>
+<script type="text/javascript" src="sage-text.js"></script>
+<script type="text/javascript" src="ganalytics.js"></script>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+
+<!-- Additional CSS customizations. --> 
+<style type="text/css"></style>
+
+<!-- Page title. --> 
+<title>Sage Math - Maxwell Distribution</title>
+</head>
+
+
+<body>
+<h1>Sage Math Tutorial - Maxwell Distribution</h1>
+<script type="text/javascript">sageHome()</script>
+
+<p>This page contains interactive Sage widgets - edit and re-evaluate them!</p>
+<p>The hot filament of an incandescent bulb emits blackbody radiation according to <a href="http://en.wikipedia.org/wiki/Planck%27s_law">Planck's Law</a>.
+	</p>
+
+<!-- Create the Sage cell. -->
+<div class="sagecell-plot" id="sagecell1"><script type="application/sage">
+k = 1.281*(10^-23) # J/K, Boltzmann constant
+h = 6.626*(10^-34) # J•s, Planck Constant
+c = 3*10^8         # m/s, speed of light
+Temperatures = [1000,2000,3000,4000,5000]
+var('T l')
+B(T,l) = ((2*h*c**2)/(l**5))*1/(exp(h*c/(l*k*T))-1)
+g = plot([])
+
+for temps in Temperatures:
+   g += plot(B(T=temps),l,0,3*10**-6)
+show(g)
+</script></div>
+
+<script type="text/javascript">sageFooter()</script>
+
+</body>
+</html>
+
+

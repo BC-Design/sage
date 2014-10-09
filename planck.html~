@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+<!-- Local files containing the website icon and stylesheet. -->
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" type="text/css" href="theme.css">
+
+<!-- Imports needed to use the Sage cell server. -->
+<script type="text/javascript" src="https://sagecell.sagemath.org/static/jquery.min.js"></script>
+<script type="text/javascript" src="https://sagecell.sagemath.org/embedded_sagecell.js"></script>
+<script type="text/javascript" src="sagecell.js"></script>
+<script type="text/javascript" src="sage-text.js"></script>
+<script type="text/javascript" src="ganalytics.js"></script>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+
+<!-- Additional CSS customizations. --> 
+<style type="text/css"></style>
+
+<!-- Page title. --> 
+<title>Sage Math - Maxwell Distribution</title>
+</head>
+
+
+<body>
+<h1>Sage Math Tutorial - Maxwell Distribution</h1>
+<script type="text/javascript">sageHome()</script>
+
+<p>This page contains interactive Sage widgets - edit and re-evaluate them!</p>
+<p>Maxwell-type probability distributions describe the distribution of properties, 
+	such as velocity or kinetic energy, in a large collection of particles.
+	</p>
+<p>Notice how the prevalence of states in the right-hand 'tail' of the distribution
+	increases rapidly for smaller values of the scaling factor 'a', though the mean changes slowly.
+	For the Maxwell-Boltzmann distribution of particles velocities in an ideal gas, a = sqrt(kT/m).
+	</p>
+
+<!-- Create the Sage cell. -->
+<div class="sagecell-plot" id="sagecell1"><script type="application/sage">
+T = 300 # absolute temperature; 300K
+masses = {'H2':2,'He':4,'Ne':10,'Ar':18,'N2':28,'O2':32} # name, mass (amu)
+k = 1.281*(10^-23) # Boltzmann constant
+a(m) = sqrt(k*T/m)
+f(x,m) = sqrt(4/pi)*(x**2)*exp(-(x**2)/(2*a**2))/(a**3)
+def f_bar(m): return numerical_integral(f(x,m)*x,0,+infinity)[0]
+plotTitle = 'Maxwell-Boltzmann Distribution, '+str(T)+'K'
+
+g = plot([],title=plotTitle,frame=True,axes_labels=['velocity, m/s','probability'])
+c = rainbow(len(masses)+3)
+
+for molecule in masses:
+    mass = masses[molecule]
+    mkg = mass*1.661*10^-27
+    vavg = f_bar(m=mkg)
+    linec = c.pop()
+    legend = molecule+': '+str(mass)[0:4]+' amu, f_bar='+str(vavg)[0:4]+' m/s'
+    g += plot(f(x,m=mkg),x,(0,2500),color=linec,legend_label=legend)
+    g += line([(vavg,0), (vavg,1)],color=linec,linestyle='--')
+g += plot([],ymax=0.0035)
+show(g)
+</script></div>
+
+<script type="text/javascript">sageFooter()</script>
+
+</body>
+</html>
+
+
