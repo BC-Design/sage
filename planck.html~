@@ -42,7 +42,7 @@ g = plot([])
 col = rainbow(len(Temperatures)+3)
 
 for temps in Temperatures:
-   legend = temps + ' K'
+   legend = str(temps) + ' K'
    g += plot(B(T=temps),l,0,3*10**-6,color=col.pop(),legend_label=legend)
 show(g)
 </script></div>
