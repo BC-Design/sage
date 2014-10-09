@@ -40,7 +40,7 @@ Temperatures = [1000,2000,3000,4000,5000]
 
 col = rainbow(len(Temperatures)+3)
 plotTitle = 'Blackbody Radiation, '+str(min(Temperatures))+'K to '+str(max(Temperatures))+'K'
-g = plot([],title=plotTitle,frame=True,axes_labels=['temperature, K','spectral radiance'])
+g = plot([],title=plotTitle,frame=True,axes_labels=['wavelength, m','spectral radiance'])
 
 for temps in Temperatures:
    legend = str(temps) + ' K'
