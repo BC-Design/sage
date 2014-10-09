@@ -39,9 +39,11 @@ Temperatures = [1000,2000,3000,4000,5000]
 var('T l')
 B(T,l) = ((2*h*c**2)/(l**5))*1/(exp(h*c/(l*k*T))-1)
 g = plot([])
+col = rainbow(len(Temperatures)+3)
 
 for temps in Temperatures:
-   g += plot(B(T=temps),l,0,3*10**-6)
+   legend = temps + ' K'
+   g += plot(B(T=temps),l,0,3*10**-6,color=col.pop(),legend_label=legend)
 show(g)
 </script></div>
 
