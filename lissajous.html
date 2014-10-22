@@ -29,21 +29,51 @@
 <p>This page contains interactive Sage widgets - edit and re-evaluate them!</p>
 <p>Lissajous figures can be used to approximate power dissipation in a plasma discharge.</p>
 
+<!-- Create the Sage cell. -->
+<div class="sagecell-linked" id="sagecell1"><script type="application/sage">
+windowSize = 1
+Vapp = [(0,0),(1,1),(2,-1),(1,-2),(0,0)]
+Vcap = [(0,0),(1,1),(2,2),(3,1),(4,0)]
+</script></div>
 
 <!-- Create the Sage cell. -->
-<div class="sagecell-plot" id="sagecell1"><script type="application/sage">
-fxn_lib = '/var/www/sage/libraries/lissajous.sage' # path to the library
-attach fxn_lib
+<div class="sagecell-linked" id="sagecell2"><script type="application/sage">
+### Python style guide: http://legacy.python.org/dev/peps/pep-0008/
+reset()
+from numpy import convolve, ones
 
-window=5
-root = '/home/brandon/Desktop/lm/'
-Vapp = data_import(root+'F0002CH1.CSV',',') # applied voltage trace
-Vcap = data_import(root+'F0002CH2.CSV',',') # series capacitor voltage trace
-windowSize = 10
+def moving_average(interval, window_size):
+    """Finds the moving average of a dataset over a window size."""
+    # algorithm via http://stackoverflow.com/questions/11352047/finding-moving-average-from-data-points-in-python
+    window= ones(int(window_size))/float(window_size)
+    return convolve(interval, window, 'same')
+
+def find_area(array):
+    """Find the array of a polygon defined as a set of Cartesian points in an array."""
+    # algorithm via http://www.arachnoid.com/area_irregular_polygon/index.html
+    a = 0
+    ox,oy = array[0]
+    for x,y in array[1:]:
+        a += (x*oy-y*ox)
+        ox,oy = x,y
+    return a/2
+
+def create_lissajous(Vapp,Vcap,window=1):
+    """Generates a Lissajous figure from the applied and capacitor voltage oscilloscope traces."""
+    x=[Vapp[i][1] for i in range(0,len(Vapp))]
+    y=[Vcap[i][1] for i in range(0,len(Vcap))]
+    if window!= 1:
+        x = moving_average(x,window)
+        y = moving_average(y,window)
+    Liss = []
+    for i in range(0,len(Vapp)):
+        Liss.append((x[i],y[i]))
+    return Liss
 
 Liss = create_lissajous(Vapp=Vapp,Vcap=Vcap,window=windowSize)
-a = list_plot(Liss[0:1000],xmin=-4,xmax=4)
-area = find_area(Liss[0:1000])
+a = list_plot([])
+a = list_plot(Liss)
+area = find_area(Liss)
 show('The area of the Lissajous figure is: ' + str(area))
 show(a)
 </script></div>
