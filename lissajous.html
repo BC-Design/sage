@@ -28,18 +28,25 @@
 
 <p>This page contains interactive Sage widgets - edit and re-evaluate them!</p>
 <p>Lissajous figures can be used to approximate power dissipation in a plasma discharge.</p>
+<p>First, copy and paste the oscilloscope trace of the applied voltage directly from the 
+	CSV file between the triple quotes in this cell and set firstColumn as appropriate
+	for the CSV file format that your oscilloscope generates:
+	</p>
 
 <!-- Create the Sage cell. -->
 <div class="sagecell-linked" id="sagecell1"><script type="application/sage">
-windowSize = 1
-firstColumn = 4 # first column in the CSV with data in it
-Vapp = """ # second, paste CSV data from the applied voltage trace here and evaluate! """
-Vcap = """ # first, paste CSV data from the series capacitor trace here! """
-
+windowSize = 5
+firstColumn = 4 # first column in the CSV file with data in it
+Vapp = """ paste over me with the data! """
 </script></div>
+
+<p>Next, copy and paste the oscilloscope trace of the series capacitor voltage directly from the 
+	CSV file between the triple quotes in this cell:</p>
 
 <!-- Create the Sage cell. -->
 <div class="sagecell-linked" id="sagecell2"><script type="application/sage">
+Vcap = """ paste over me with the data! """
+
 from numpy import convolve, ones
 
 def moving_average(interval, window_size):
@@ -99,6 +106,10 @@ area = find_area(Liss[0:1000])
 show('The area of the Lissajous figure is: ' + str(area))
 show(a)
 </script></div>
+
+<p>And there you have it!  
+	A Lissajous figure and an estimation of the power dissipation in your discharge.
+	</p>
 
 <script type="text/javascript">sageFooter()</script>
 
