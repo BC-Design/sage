@@ -32,8 +32,10 @@
 <!-- Create the Sage cell. -->
 <div class="sagecell-linked" id="sagecell1"><script type="application/sage">
 windowSize = 1
-Vapp = [(0,0),(1,1),(2,-1),(1,-2),(0,0)]
-Vcap = [(0,0),(1,1),(2,2),(3,1),(4,0)]
+firstColumn = 4 # first column in the CSV with data in it
+Vapp = """ # paste CSV data from the applied voltage trace here! """
+Vcap = """ # paste CSV data from the series capacitor trace here! """
+
 </script></div>
 
 <!-- Create the Sage cell. -->
@@ -45,6 +47,26 @@ def moving_average(interval, window_size):
     # algorithm via http://stackoverflow.com/questions/11352047/finding-moving-average-from-data-points-in-python
     window= ones(int(window_size))/float(window_size)
     return convolve(interval, window, 'same')
+
+def data_import(fileName,fileSeparator,firstColumn=1):
+    """Imports data from .csv and puts it into an array."""
+    dataFile = open(fileName, 'r')
+    line = dataFile.readline()
+    holdingList = []
+    while(line != ''): 
+        holdingLine = tuple(float(item.strip()) for item in line.split(',')[firstColumn-1:firstColumn+1])
+        holdingList.append(holdingLine)
+        line = dataFile.readline()
+    return holdingList
+    
+def data_pasted(dataString,fileSeparator,firstColumn=1):
+    """Prepares data that has been copied and pasted into the worksheet from a CSV file."""
+    dataList = dataString.splitlines()
+    dataReturn = []
+    for line in dataList:
+        dataLine = tuple(float(item.strip()) for item in line.split(',')[firstColumn-1:firstColumn+1])
+        dataReturn.append(dataLine)
+    return dataReturn
 
 def find_area(array):
     """Find the array of a polygon defined as a set of Cartesian points in an array."""
@@ -68,10 +90,12 @@ def create_lissajous(Vapp,Vcap,window=1):
         Liss.append((x[i],y[i]))
     return Liss
 
+Vapp = data_pasted(dataString=Vapp,fileSeparator=',',firstColumn=4) # applied voltage trace
+Vcap = data_pasted(dataString=Vcap,fileSeparator=',',firstColumn=4) # series capacitor voltage trace
+
 Liss = create_lissajous(Vapp=Vapp,Vcap=Vcap,window=windowSize)
-a = list_plot([])
 a = list_plot(Liss)
-area = find_area(Liss)
+area = find_area(Liss[0:1000])
 show('The area of the Lissajous figure is: ' + str(area))
 show(a)
 </script></div>
