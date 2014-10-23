@@ -50,7 +50,9 @@
 
 <p>First, copy and paste the oscilloscope trace of the applied voltage directly from the 
 	CSV file between the triple quotes in this cell and set firstColumn as appropriate
-	for the CSV file format that your oscilloscope generates:
+	for the CSV file format that your oscilloscope generates. The default value of 
+	firstColumn is set to '4' for compatibility with most Tektronix oscilloscopes.
+	Hit 'Go!' to load the data; it will take a second to complete."
 	</p>
 
 <!-- Create the Sage cell. -->
@@ -58,10 +60,11 @@
 windowSize = 5
 firstColumn = 4 # first column in the CSV file with data in it
 Vapp = """ paste over me with the data! """
+print "Data loaded!"
 </script></div>
 
 <p>Next, copy and paste the oscilloscope trace of the series capacitor voltage directly from the 
-	CSV file between the triple quotes in this cell:</p>
+	CSV file between the triple quotes in this cell and hit 'Go!':</p>
 
 <!-- Create the Sage cell. -->
 <div class="sagecell-linked" id="sagecell2"><script type="application/sage">
