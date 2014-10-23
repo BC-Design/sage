@@ -26,10 +26,24 @@
 <h1>Sage Math Tutorial - Lissajous Figures</h1>
 <script type="text/javascript">sageHome()</script>
 
-<p>This page contains interactive Sage widgets - edit and re-evaluate them!</p>
 <p>Lissajous figures can be used to approximate power dissipation in a plasma discharge.
-	Don't have your own oscilloscope data to work with? Here is some sample data
-	from a dielectric barrier surface microdischarge (SMD):
+	Current pulses in a dielectric barrier discharge (DBD) occur in short, high-
+	frequency pulses that are usually too fast to accurately capture with an oscilloscope.
+	This makes it impossible to accurately measure power dissipation by simply recording
+	voltage and current and multiplying them together as you normally would.
+	</p>
+
+<p>The Lissajous method remedies this by placing a capacitor in series with the DBD.
+	The capacitor electrically 'integrates' the current flow through the DBD by storing
+	charge; this charge can be measured by monitoring the voltage across this capacitor.
+	The charge on the capacitor can be plotted against the voltage applied across the
+	DBD to produce a Lissajous figure, which for a DBD is typically a parallelogram.
+	The integral of this parallelogram is the power dissipation per AC cycle, and the
+	power dissipation rate can be found by multiple this value by the frequency.
+	</p>
+
+<p>Don't yet have your own oscilloscope data to work with? Here is some sample data
+	from a dielectric barrier surface microdischarge (SMD) in the GravesLab:
 	<a href="data/Vapp.CSV">Vapp.CSV</a>; 
 	<a href="data/Vcap.CSV">Vcap.CSV</a>
 	</p>
