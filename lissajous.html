@@ -83,7 +83,7 @@ def find_area(array):
     for x,y in array[1:]:
         a += (x*oy-y*ox)
         ox,oy = x,y
-    return a/2
+    return abs(a/2)
 
 def create_lissajous(Vapp,Vcap,window=1):
     """Generates a Lissajous figure from the applied and capacitor voltage oscilloscope traces."""
