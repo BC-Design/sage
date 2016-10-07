@@ -47,10 +47,9 @@ $(function() {
 		      evalButtonText: 'Go!'});
 		}
 		
-		sagecell.init(makecells);
   }
   
-  
+  sagecell.init(makecells);
 	
 });
 
