@@ -6,11 +6,11 @@ $(function() {
 	  if ($('.sagecell-plot').length) { 
 		  sagecell.makeSagecell({
 		      inputLocation: '.sagecell-plot', 
-		      // languages: sagecell.allLanguages, 
+		      languages: ["python","sage"], 
 		      replaceOutput: true,
 		      autoeval: false,
 		      linked: false,
-		      hide: ['messages', 'computationID', 'files', 'sageMode', 'editorToggle', 'sessionTitle', 'done', 'permalink'],
+		      show: ['sageMode'],
 		      evalButtonText: 'Go!'});
 	  };
 

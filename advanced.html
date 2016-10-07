@@ -1,7 +1,9 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 
-<html>
+<html lang="en">
 <head>
+<meta charset="utf-8">
+
 <!-- Local files containing the website icon and stylesheet. -->
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 <link rel="stylesheet" type="text/css" href="theme.css">
@@ -14,10 +16,10 @@
 <script type="text/javascript" src="ganalytics.js"></script>
 <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
 
-<!-- Additional CSS customizations --> 
+<!-- Additional CSS customizations -->
 <style type="text/css"></style>
 
-<!-- Page title --> 
+<!-- Page title -->
 <title>Sage Math - Advanced</title>
 </head>
 
@@ -59,7 +61,7 @@ while (t<tEnd):
     a[6] = k[6]*X[3]    # reverse reaction 3
     a[7] = k[7]*X[4]    # reverse reaction 4
     a[8] = k[8]*X[4]    # irreversible activation
-    
+
     for j in range(0,rxns):
         at = at + a[j]         ## calculate the 'overall reaction rate'
         r[j] = random()        ## generate the needed random numbers
@@ -68,7 +70,7 @@ while (t<tEnd):
     while(t>=Tprint):                                 ## until the next reaction occurs..
         sol.append([Tprint,X[0],X[1],X[2],X[3],X[4]]) ## the concentrations stay the same
         Tprint=Tprint+tStep                           ## as time increments
-    
+
     i = 1                          ## (which reaction is being investigated)
     while (i <= rxns):                ## and when a reaction DOES occur...
         sum = 0
@@ -149,5 +151,3 @@ a.axes_labels(['time','number']); a.axes_label_color('grey'); show(a)
 
 </body>
 </html>
-
-

@@ -1,7 +1,9 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 
-<html>
+<html lang="en">
 <head>
+<meta charset="utf-8">
+
 <!-- Local files containing the website icon and stylesheet. -->
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 <link rel="stylesheet" type="text/css" href="theme.css">
@@ -14,10 +16,10 @@
 <script type="text/javascript" src="ganalytics.js"></script>
 <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
 
-<!-- Additional CSS customizations --> 
+<!-- Additional CSS customizations -->
 <style type="text/css"></style>
 
-<!-- Page title --> 
+<!-- Page title -->
 <title>Sage Math - Nonlinear Systems</title>
 </head>
 
@@ -29,7 +31,7 @@
 <p>This page contains interactive Sage widgets - edit and re-evaluate them!</p>
 <p>"The Lotka-Volterra equations, also known as the predator-prey equations, are a pair of first-order, non-linear, differential equations frequently used to describe the dynamics of biological systems in which two species interact, one a predator and one its prey." via <a href="http://en.wikipedia.org/wiki/Lotka%E2%80%93Volterra_equation">Wikipedia</a></p>
 
-<!-- Create the Sage cell.  
+<!-- Create the Sage cell.
      You can put this anywhere, e.g., inside tables, etc. -->
 <h2>Simulating Lotka-Volterra Population Dynamics</h2>
 <div class="sagecell-plot" id="sagecell1"><script type="application/sage">
@@ -66,7 +68,7 @@ for i in range(steps):
     sol_t.append(sol[i][0])
     sol_R.append(sol[i][1])
     sol_F.append(sol[i][2])
-    
+
 a = plot([],figsize=[6,4])
 a += line(zip(sol_R,sol_F))
 a += plot_vector_field((des[0], des[1]), (R,0,7000), (F,0,225),xmin=1500,color='orange')
@@ -76,5 +78,3 @@ a.axes_labels(['Rabbits','Foxes']); show(a)
 <script type="text/javascript">sageFooter()</script>
 </body>
 </html>
-
-

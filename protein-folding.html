@@ -1,7 +1,9 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 
-<html>
+<html lang="en">
 <head>
+<meta charset="utf-8">
+
 <!-- Local files containing the website icon and stylesheet. -->
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 <link rel="stylesheet" type="text/css" href="theme.css">
@@ -14,10 +16,10 @@
 <script type="text/javascript" src="ganalytics.js"></script>
 <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
 
-<!-- Additional CSS customizations. --> 
+<!-- Additional CSS customizations. -->
 <style type="text/css"></style>
 
-<!-- Page title. --> 
+<!-- Page title. -->
 <title>Sage Math - Protein Folding</title>
 </head>
 
@@ -52,7 +54,7 @@ def example(k_0=(20,(0,40,5)),k_1=(20,(0,40,5)),k_2=(2,(0,20,2)),k_3=(2,(0,20,2)
     des = lambda t,y: [Vin(t)-Vout(t), Vin(t)*Cin[0]-k[0]*(y[1]/y[0]), Vin(t)*Cin[1]+k[0]*(y[1]/y[0])-k[1]*(y[2]/y[0])+k[2]*(y[3]/y[0])-2*k[3]*(y[2]/y[0])^2, Vin(t)*Cin[2]+k[1]*(y[2]/y[0])-k[2]*(y[3]/y[0]), Vin(t)*Cin[3]+k[3]*(y[2]/y[0])^2]
     T = ode_solver(function=des, y_0=ics)
     T.ode_solve(t_span=[0,t_f], num_points=t_num)
-    
+
     sols = [0]; sol_temp = []; vol = T.interpolate_solution(0)
     for i in range(1, len(T.solution[0][1])):
         sol = T.interpolate_solution(i)
@@ -60,7 +62,7 @@ def example(k_0=(20,(0,40,5)),k_1=(20,(0,40,5)),k_2=(2,(0,20,2)),k_3=(2,(0,20,2)
         for j in range(0,len(T.solution)):
             sol_temp.append([vol[j][0],sol[j][1]/vol[j][1]])
         sols.append(sol_temp)
-    
+
     a = plot([],figsize=(6,4))
     a += list_plot(sols[1], color='red', legend_label='[denatured]')
     a += list_plot(sols[2], color='orange', legend_label='[intermediate]')
@@ -90,5 +92,3 @@ def example(k_0=(20,(0,40,5)),k_1=(20,(0,40,5)),k_2=(2,(0,20,2)),k_3=(2,(0,20,2)
 
 </body>
 </html>
-
-

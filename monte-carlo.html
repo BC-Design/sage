@@ -1,7 +1,9 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 
-<html>
+<html lang="en">
 <head>
+<meta charset="utf-8">
+
 <!-- Local files containing the website icon and stylesheet. -->
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 <link rel="stylesheet" type="text/css" href="theme.css">
@@ -14,11 +16,11 @@
 <script type="text/javascript" src="ganalytics.js"></script>
 <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
 
-<!-- Additional CSS customizations --> 
+<!-- Additional CSS customizations -->
 <style type="text/css"></style>
 
-<!-- Page title --> 
-<title>Sage Math - Monte Carlo</title>
+<!-- Page title -->
+<title>Sage Math - Monte Carlo Simulations</title>
 </head>
 
 
@@ -30,7 +32,7 @@
 <p>"Monte Carlo methods (or Monte Carlo experiments) are a class of computational algorithms that rely on repeated random sampling to compute their results. Monte Carlo methods are often used in computer simulations of physical and mathematical systems. These methods are most suited to calculation by a computer and tend to be used when it is infeasible to compute an exact result with a deterministic algorithm. This method is also used to complement theoretical derivations." via: <a href=http://en.wikipedia.org/wiki/Monte_Carlo_method>Wikipedia</a></p>
 
 
-<!-- Create the Sage cell.  
+<!-- Create the Sage cell.
      You can put this anywhere, e.g., inside tables, etc. -->
 <h2>Monte Carlo Estimation of The Value of Pi</h2>
 <div class="sagecell-plot" id="sagecell1"><script type="application/sage">
@@ -42,11 +44,11 @@ n = 100  ## Try changing this! This is the number of shots the estimate is based
 for i in range(0,n):
     [x,y]=[random(),random()]
     points.append([x,y])
-    
+
 ### If a shot lands inside the circle, make a note of it
     if (y <= sqrt((r^2)-(x^2))):
         inside += 1
-        
+
 ### Approximate pi based on the fraction of shots that landed in the circle
 ### Area of circle = pi*r^2; Area of square = (2*r)^2 = 4*r^2
 ### Shots in circle / Shots in square = (pi*r^2)/(4*r^20 = pi()/4
@@ -72,5 +74,3 @@ show(graph)
 <script type="text/javascript">sageFooter()</script>
 </body>
 </html>
-
-

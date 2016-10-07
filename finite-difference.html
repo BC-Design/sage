@@ -1,7 +1,9 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 
-<html>
+<html lang="en">
 <head>
+<meta charset="utf-8">
+
 <!-- Local files containing the website icon and stylesheet. -->
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 <link rel="stylesheet" type="text/css" href="theme.css">
@@ -14,10 +16,10 @@
 <script type="text/javascript" src="ganalytics.js"></script>
 <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
 
-<!-- Additional CSS customizations --> 
+<!-- Additional CSS customizations -->
 <style type="text/css"></style>
 
-<!-- Page title --> 
+<!-- Page title -->
 <title>Sage Math - Finite Difference Method</title>
 </head>
 
@@ -30,7 +32,7 @@
 <p>Finite Difference Methods can be used to approximate the solutions of systems of differential equations: <a href="http://en.wikipedia.org/wiki/Finite_difference_method">Wikipedia - Finite Difference Methods</a>.  The Sage Cells in this page are linked, so variables and calculations carry over from one Cell to the next.</p>
 
 <div class="linkedcells">
-	<p>First, we define a simple finite difference method.  In this example, all sides are perfectly insulated and one of them contains a heating wire: 
+	<p>First, we define a simple finite difference method.  In this example, all sides are perfectly insulated and one of them contains a heating wire:
 	</p>
 	<div class="sagecell-linked" id="sagecell1"><script type="application/sage">
 import numpy
@@ -73,7 +75,7 @@ while step <= maxstep:
 	<div class="sagecell-linked" id="sagecell1"><script type="application/sage">
 for i in range(0,len(steps)):
     a += list_plot3d(sol[steps[i]/stepinterval], texture=colors[i], interpolation_type='spline')
-    
+
 @interact
 def example(jmol=('Rotatable Plot', False), theta=(1.5*pi,(0,2*pi))):
     b = a.rotate((0,0,1), theta)
@@ -87,5 +89,3 @@ def example(jmol=('Rotatable Plot', False), theta=(1.5*pi,(0,2*pi))):
 
 </body>
 </html>
-
-

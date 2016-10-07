@@ -1,7 +1,9 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 
-<html>
+<html lang="en">
 <head>
+<meta charset="utf-8">
+
 <!-- Local files containing the website icon and stylesheet. -->
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 <link rel="stylesheet" type="text/css" href="theme.css">
@@ -14,10 +16,10 @@
 <script type="text/javascript" src="ganalytics.js"></script>
 <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
 
-<!-- Additional CSS customizations. --> 
+<!-- Additional CSS customizations. -->
 <style type="text/css"></style>
 
-<!-- Page title. --> 
+<!-- Page title. -->
 <title>Sage Math - Lissajous Figures</title>
 </head>
 
@@ -27,7 +29,7 @@
 <script type="text/javascript">sageHome()</script>
 
 <p>Lissajous figures can be used to approximate power dissipation in a plasma discharge.
-	Current pulses in a dielectric barrier discharge (DBD) occur in short, high-frequency 
+	Current pulses in a dielectric barrier discharge (DBD) occur in short, high-frequency
 	pulses that are usually too fast to accurately capture with an oscilloscope.
 	This makes it impossible to accurately measure power dissipation by simply recording
 	voltage and current and multiplying them together as you normally would.
@@ -48,9 +50,9 @@
 	<a href="data/Vcap.CSV.txt" target="_blank">Vcap.CSV</a>
 	</p>
 
-<p>First, copy and paste the oscilloscope trace of the applied voltage directly from the 
+<p>First, copy and paste the oscilloscope trace of the applied voltage directly from the
 	CSV file between the triple quotes in this cell and set firstColumn as appropriate
-	for the CSV file format that your oscilloscope generates. The default value of 
+	for the CSV file format that your oscilloscope generates. The default value of
 	firstColumn is set to '4' for compatibility with most Tektronix oscilloscopes.
 	Hit 'Go!' to load the data; it will take a second to complete.
 	</p>
@@ -63,7 +65,7 @@ Vapp = """ paste over me with the data! """
 print "Data loaded!"
 </script></div>
 
-<p>Next, copy and paste the oscilloscope trace of the series capacitor voltage directly from the 
+<p>Next, copy and paste the oscilloscope trace of the series capacitor voltage directly from the
 	CSV file between the triple quotes in this cell and hit 'Go!':</p>
 
 <!-- Create the Sage cell. -->
@@ -83,12 +85,12 @@ def data_import(fileName,fileSeparator,firstColumn=1):
     dataFile = open(fileName, 'r')
     line = dataFile.readline()
     holdingList = []
-    while(line != ''): 
+    while(line != ''):
         holdingLine = tuple(float(item.strip()) for item in line.split(',')[firstColumn-1:firstColumn+1])
         holdingList.append(holdingLine)
         line = dataFile.readline()
     return holdingList
-    
+
 def data_pasted(dataString,fileSeparator,firstColumn=1):
     """Prepares data that has been copied and pasted into the worksheet from a CSV file."""
     dataList = dataString.splitlines()
@@ -130,7 +132,7 @@ show('The area of the Lissajous figure is: ' + str(area))
 show(a)
 </script></div>
 
-<p>And there you have it!  
+<p>And there you have it!
 	A Lissajous figure and an estimation of the power dissipation in your discharge.
 	</p>
 
@@ -138,5 +140,3 @@ show(a)
 
 </body>
 </html>
-
-
