@@ -12,7 +12,7 @@ $(function() {
 		      linked: false,
 		      hide: ['messages', 'computationID', 'files', 'sageMode', 'editorToggle', 'sessionTitle', 'done', 'permalink'],
 		      evalButtonText: 'Go!'});
-	  }
+	  };
 
 	  if ($('.sagecell-linked').length) {
 		  sagecell.makeSagecell({
@@ -23,7 +23,7 @@ $(function() {
 		      linked: true,
 		      hide: ['messages', 'computationID', 'files', 'sageMode', 'editorToggle', 'sessionTitle', 'done', 'permalink'],
 		      evalButtonText: 'Go!'});
-	  }
+	  };
 
 	  if ($('.sagecell-auto').length) {
 		  sagecell.makeSagecell({
@@ -34,7 +34,7 @@ $(function() {
 		      linked: false,
 		      hide: ['messages', 'computationID', 'files', 'sageMode', 'editorToggle', 'sessionTitle', 'done', 'permalink'],
 		      evalButtonText: 'Go!'});
-	  }
+	  };
 
 	  if ($('.sagecell-auto-hide').length) {
 		  sagecell.makeSagecell({
@@ -45,9 +45,9 @@ $(function() {
 		      linked: false,
 		      hide: ['messages', 'computationID', 'files', 'sageMode', 'editorToggle', 'sessionTitle', 'done', 'permalink', 'editor', 'evalButton'],
 		      evalButtonText: 'Go!'});
-		}
+		};
 		
-  }
+  };
   
   sagecell.init(makecells);
 	
