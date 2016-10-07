@@ -49,7 +49,7 @@ $(function() {
 		
   };
   
-  sagecell.init(makecells);
+  makecells();
 	
 });
 
