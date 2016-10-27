@@ -6,7 +6,7 @@ $(function() {
 	  if ($('.sagecell-plot').length) { 
 		  sagecell.makeSagecell({
 		      inputLocation: '.sagecell-plot', 
-		      languages: ["python","sage"], 
+		      languages: sagecell.allLanguages, // ["python","sage"], 
 		      replaceOutput: true,
 		      autoeval: false,
 		      linked: false,
